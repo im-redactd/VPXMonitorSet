@@ -8,11 +8,16 @@ This tool helps Visual Pinball X users automatically set their preferred display
 
 ## Features
 
-Automatically detects all connected displays
-Sets the target display in both VPinball registry and VPinballX.ini
-Configurable target resolution (defaults to 3840 pixels width)
-Debug mode for troubleshooting
-Can be run at startup or manually
+- Automatically detects all connected displays
+
+- Sets the target display in both VPinball registry and VPinballX.ini
+
+- Configurable target resolution (defaults to `3840` pixels width)
+
+- Debug mode for troubleshooting
+
+- Can be run at startup or manually
+
 ## Usage
 
 ### Basic Use
@@ -23,10 +28,6 @@ VPXMonitorSet.exe
 
 ### Custom Resolution
 To target a different resolution:
-```
-VPXMonitorSet.exe --resolution 1920
-```
-or
 ```
 VPXMonitorSet.exe -r 1920
 ```
@@ -40,6 +41,7 @@ VPXMonitorSet.exe --debug
 ## Installation
 
 Download the latest release
+
 Place the executable in any folder
 
 ## Windows Defender?
@@ -61,19 +63,19 @@ Place a shortcut to this batch file in your startup folder (%APPDATA%\Microsoft\
 
 The utility modifies two locations:
 
-Registry: HKEY_CURRENT_USER\SOFTWARE\Visual Pinball\VP10\Player
-INI File: %APPDATA%\VPinballX\VPinballX.ini
+- Registry: `HKEY_CURRENT_USER\SOFTWARE\Visual Pinball\VP10\Player`
+
+- INI File: `%APPDATA%\VPinballX\VPinballX.ini`
 
 ## Troubleshooting
 
 If the utility isn't finding your displays:
 
-Run with --debug flag to see all detected displays.
+- Run with --debug flag to see all detected displays.
 
-Check if your target resolution matches the actual display resolution
+- Check if your target resolution matches the actual display resolution
 
-If Windows Defender blocks the application:
-  Place the executable in a regular folder (not Startup)
-  
-  Use the batch file method for startup configuration
+- If Windows Defender blocks the application:
+   - Place the executable in a regular folder (not Startup)
+   - Use the batch file method for startup configuration
   
