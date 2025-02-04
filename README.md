@@ -58,7 +58,7 @@ Create a batch file (e.g., vpx-monitor-config.bat) with this content:
 cd /d "C:\Path\To\Your\Folder"
 start "" /B "VPXMonitorSet.exe"
 ```
-Place a shortcut to this batch file in your startup folder (%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup)
+Place a shortcut to this batch file in your startup folder (`%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup`)
 ## Configuration Files Modified
 
 The utility modifies two locations:
