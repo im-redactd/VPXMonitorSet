@@ -78,4 +78,8 @@ If the utility isn't finding your displays:
 - If Windows Defender blocks the application:
    - Place the executable in a regular folder (not Startup)
    - Use the batch file method for startup configuration
+
+## Credit
+I ran across this article and solution which dumps the directx output and finds the correct monitor. I just took this concept and put it into a c# exe.
+`https://greatjava.org/2022/04/who-stuck-the-pinball-on-my-backbox/`
   
