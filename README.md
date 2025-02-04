@@ -4,7 +4,7 @@ A simple command-line utility for automatically configuring Visual Pinball X's d
 
 ## Purpose
 
-This tool helps VPinball/VPinballX users automatically set their preferred display for the game by detecting monitors with specific resolutions. It's particularly useful for multi-monitor setups where you want VPX to consistently launch on a specific display.
+This tool helps Visual Pinball X users automatically set their preferred display for the game by detecting monitors with specific resolutions. It's particularly useful for multi-monitor setups where you want VPX to consistently launch on a specific display. This exists because some environments change the order of the primary monitor on restart.
 
 ## Features
 
