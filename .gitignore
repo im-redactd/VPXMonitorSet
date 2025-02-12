@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/VPXMonitorSet-v1.01.zip
+/VPXMonitorSet.exe
+/VPXMonitorSet-v1.zip
