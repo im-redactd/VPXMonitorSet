@@ -94,6 +94,7 @@ class Program
 
         var displays = EnumerateDisplays();
         int targetIndex = -1;
+        string? targetDeviceName = null;
 
         for (int i = 0; i < displays.Count; i++)
         {
@@ -103,6 +104,7 @@ class Program
             if (width == targetResolution)
             {
                 targetIndex = i;
+                targetDeviceName = deviceName;
                 break;
             }
         }
@@ -112,6 +114,7 @@ class Program
             Log($"Found display with resolution {targetResolution} at index {targetIndex}");
             UpdateRegistry(targetIndex);
             UpdateIniFile(targetIndex);
+            UpdateFuturePinballRegistry(targetDeviceName);
         }
         else
         {
@@ -177,6 +180,28 @@ class Program
             throw;
         }
     }
+    static void UpdateFuturePinballRegistry(string deviceName)
+    {
+        if (string.IsNullOrEmpty(deviceName))
+        {
+            throw new ArgumentException("Device name cannot be null or empty", nameof(deviceName));
+        }
+
+        Log($"Updating Future Pinball registry with device name: {deviceName}");
+
+        try
+        {
+            using var key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Future Pinball\GamePlayer");
+            key.SetValue("PlayfieldMonitorID", deviceName, RegistryValueKind.String);
+            Log("Future Pinball registry update successful");
+        }
+        catch (Exception ex)
+        {
+            Log($"Future Pinball registry update failed: {ex.Message}");
+            throw;
+        }
+    }
+
 
     static void UpdateIniFile(int index)
     {
