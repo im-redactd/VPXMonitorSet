@@ -61,7 +61,7 @@ This utility detects connected monitors, selects the appropriate one based on re
 - **Name Matching & Future Pinball Setup:**  
   Match monitors by name and configure Future Pinball’s backbox:
   ```sh
-  VPXMonitorSet.exe -pn "LG" -b 1080 -bn "INSIGNIA"
+  VPXMonitorSet.exe -pn "LG" -bn "INSIGNIA"
   ```
 
 - **Debug and Logging Mode:**  
