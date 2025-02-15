@@ -1,85 +1,122 @@
 # VPX Monitor Configuration Utility
 
-A simple command-line utility for automatically configuring Visual Pinball X's display settings based on monitor resolution.
+**VPX Monitor Configuration Utility** is a command-line tool for automatically configuring Visual Pinball X (VPX) display settings based on your monitor’s resolution and name criteria. It is particularly useful for multi-monitor setups where the primary display may change between sessions.
 
-## Purpose
+## Overview
 
-This tool helps Visual Pinball X users automatically set their preferred display for the game by detecting monitors with specific resolutions. It's particularly useful for multi-monitor setups where you want VPX to consistently launch on a specific display. This exists because some environments change the order of the primary monitor on restart.
+This utility detects connected monitors, selects the appropriate one based on resolution or name, and updates the VPX configuration (both registry and INI file). Additionally, it configures Future Pinball’s playfied and optionally the backbox monitor settings.
 
 ## Features
 
-- Automatically detects all connected displays
+- **Automatic Display Detection:** Scans and identifies all connected monitors.
+- **Configuration Updates:** Modifies VPX settings via the registry (`HKCU\SOFTWARE\Visual Pinball\VP10\Player`) and the INI file (`%APPDATA%\VPinballX\VPinballX.ini`).
+- **Customizable Targeting:** Set target resolution (default is `3840` pixels) or match monitors by name.
+- **Future Pinball Support:** Optionally configure the backbox monitor (registry: `HKCU\SOFTWARE\Future Pinball\GamePlayer`).
+- **Debug and Logging:** Enable detailed output and file logging for troubleshooting.
 
-- Sets the target display in both VPinball registry and VPinballX.ini
+## Command-Line Options
 
-- Configurable target resolution (defaults to `3840` pixels width)
+### General Options
 
-- Debug mode for troubleshooting
+- `-h`, `--help`  
+  Display this help message and exit.
 
-- Can be run at startup or manually
+- `--debug`  
+  Enable detailed debug output.
 
-## Usage
+- `--log`  
+  Enable logging to a file.
 
-### Basic Use
-Simply run the executable:
-```
-VPXMonitorSet.exe
-```
+### Playfield Monitor Options
 
-### Custom Resolution
-To target a different resolution:
-```
-VPXMonitorSet.exe -r 1920
-```
+- `-r`, `--resolution <value>`  
+  Set the target resolution (in pixels width) for the playfield monitor.  
+  **Default:** `3840`
 
-### Debug Mode
-To see detailed information about detected displays:
-```
-VPXMonitorSet.exe --debug
-```
+- `-pn`, `--playfield-name <name>`  
+  Specify a substring to match the playfield monitor’s name.
+
+### Future Pinball Options
+
+- `-b`, `--backbox <value>`  
+  Set the target resolution for the Future Pinball backbox monitor.
+
+- `-bn`, `--backbox-name <name>`, `--bn <name>`  
+  Specify a substring to match the backbox monitor’s name.
+
+## Usage Examples
+
+- **Default Execution:**  
+  Run with default playfield resolution:
+  ```sh
+  VPXMonitorSet.exe
+  ```
+
+- **Custom Resolution:**  
+  Target a playfield monitor with a different resolution:
+  ```sh
+  VPXMonitorSet.exe -r 1920
+  ```
+
+- **Name Matching & Future Pinball Setup:**  
+  Match monitors by name and configure Future Pinball’s backbox:
+  ```sh
+  VPXMonitorSet.exe -pn "LG" -bn "INSIGNIA"
+  ```
+
+- **Debug and Logging Mode:**  
+  Enable verbose output and file logging:
+  ```sh
+  VPXMonitorSet.exe --debug --log
+  ```
 
 ## Installation
 
-Download the latest release
+1. **Download the Latest Release:**  
+   Obtain the executable from the releases page.
 
-Place the executable in any folder
+2. **Place the Executable:**  
+   Move the executable to your desired folder.
 
-## Windows Defender?
+## Automatic Startup
 
-I've run into issues placing this utility directly in the startup folder. Placing it in another location and calling it from a bat file seems to be a working process.
+To have the utility run at Windows startup:
 
-### Automatic Startup
+1. **Create a Batch File:**  
+   Create a file (e.g., `vpx-monitor-config.bat`) with:
+   ```batch
+   @echo off
+   cd /d "C:\Path\To\Your\Folder"
+   start "" /B "VPXMonitorSet.exe"
+   ```
+2. **Add to Startup:**  
+   Place a shortcut to this batch file in:
+   ```
+   %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup
+   ```
 
-To run at Windows startup:
+*Note:* If Windows Defender interferes with executables placed directly in the Startup folder, use this batch file method.
 
-Create a batch file (e.g., vpx-monitor-config.bat) with this content:
-```
-@echo off
-cd /d "C:\Path\To\Your\Folder"
-start "" /B "VPXMonitorSet.exe"
-```
-Place a shortcut to this batch file in your startup folder (`%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup`)
 ## Configuration Files Modified
 
-The utility modifies two locations:
+- **Visual Pinball X:**
+  - **Registry:** `HKEY_CURRENT_USER\SOFTWARE\Visual Pinball\VP10\Player`
+  - **INI File:** `%APPDATA%\VPinballX\VPinballX.ini`
 
-- Registry: `HKEY_CURRENT_USER\SOFTWARE\Visual Pinball\VP10\Player`
-
-- INI File: `%APPDATA%\VPinballX\VPinballX.ini`
+- **Future Pinball (if configured):**
+  - **Registry:** `HKEY_CURRENT_USER\SOFTWARE\Future Pinball\GamePlayer`
 
 ## Troubleshooting
 
-If the utility isn't finding your displays:
+- **Monitor Detection Issues:**  
+  Run with the `--debug` flag to review detailed output and verify that your target resolution or name criteria match the actual monitor settings.
 
-- Run with --debug flag to see all detected displays.
+- **Registry/INI Updates Not Applied:**  
+  Ensure the utility has the necessary permissions and that you’re using the correct registry paths.
 
-- Check if your target resolution matches the actual display resolution
+- **Windows Defender Blockage:**  
+  If the executable is blocked, relocate it and run via the batch file method described above.
 
-- If Windows Defender blocks the application:
-   - Place the executable in a regular folder (not Startup)
-   - Use the batch file method for startup configuration
+## Credits
 
-## Credit
-I ran across this article and solution which dumps the directx output and finds the correct monitor. I just took this concept and put it into a c# exe.
-`https://greatjava.org/2022/04/who-stuck-the-pinball-on-my-backbox/`
-  
+This utility was inspired by a solution that leverages DirectX output to identify the correct monitor. For more details, please refer to the original article: [Who Stuck the Pinball on My Backbox?](https://greatjava.org/2022/04/who-stuck-the-pinball-on-my-backbox/).
