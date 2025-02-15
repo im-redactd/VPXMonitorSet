@@ -1,0 +1,10 @@
+﻿<Directives>
+	<Application>
+		<Assembly Name="System.Management">
+			<Type Name="System.Management.ManagementScope" Dynamic="Required All" />
+			<Type Name="System.Management.ManagementObject" Dynamic="Required All" />
+			<Type Name="System.Management.ManagementBaseObject" Dynamic="Required All" />
+			<Type Name="System.Management.ManagementObjectSearcher" Dynamic="Required All" />
+		</Assembly>
+	</Application>
+</Directives>
